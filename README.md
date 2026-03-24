@@ -12,6 +12,7 @@
 | **email** | VARCHAR | Unique (Optional) | Guest email for notifications. |
 | **phone** | VARCHAR | - | Contact number. |
 | **plus_one_user_id**| INT | FK (Self) | ID of the linked partner/guest. |
+| **allows_plus_one** | BOOLEAN | FALSE | Controls if the "Add Guest" UI appears for this user. |
 | **rsvp_status_id** | INT | FK | Links to `lookup_rsvp_status`. |
 | **dietary_req** | TEXT | - | Guest food allergies or preferences. |
 | **song_request** | TEXT | - | Guest dance floor requests. |
@@ -64,6 +65,8 @@ CREATE TABLE users (
     created_at TIMESTAMPTZ DEFAULT NOW(),
     updated_at TIMESTAMPTZ DEFAULT NOW()
 );
+
+ALTER TABLE users ADD COLUMN allows_plus_one BOOLEAN DEFAULT FALSE;
 
 -- 3. Seed Lookup Data
 INSERT INTO lookup_category (category) VALUES ('family'), ('friend'), ('+1');
